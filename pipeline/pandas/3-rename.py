@@ -5,6 +5,7 @@
 import pandas as pd
 
 
-def from_file(filename, delimiter=','):
-    DataFrame = pd.read_csv(filename, sep=delimiter)
-    return DataFrame
+def from_file(filename, delimiter):
+    """create a DataFrame from a file"""
+    df = pd.read_csv(filename, sep=delimiter)
+    return df
