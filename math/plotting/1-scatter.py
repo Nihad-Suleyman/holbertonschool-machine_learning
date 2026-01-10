@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 def scatter():
     """we will have normal distribution kkind of plot"""
-    mean = [69, 9]
+    mean = [69, 0]
     cov = [[15, 8], [8, 15]]
     np.random.seed(5)
     x, y = np.random.multivariate_normal(mean, cov, 2000).T
