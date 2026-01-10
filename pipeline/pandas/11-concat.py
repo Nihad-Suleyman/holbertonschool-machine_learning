@@ -2,6 +2,10 @@
 """now we will use concatination"""
 
 
+import pandas as pd
+index = __inport__('10-index').index
+
+
 def concat(df1, df2):\
     """we will set indexes of both dfs and then concatenate"""
     df1 = df1.set_index('Timestamp')
