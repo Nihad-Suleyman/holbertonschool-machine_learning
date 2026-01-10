@@ -7,5 +7,5 @@ import pandas as pd
 
 def from_file(filename, delimiter):
     """create a DataFrame from a file"""
-    df = pd.read_csv(filename, sep=delimiter)
+    df = pd.read_csv(filename, delimiter=delimiter)
     return df
