@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Now we will evaluate scatter"""
 
+import numpy as np
+import matplotlib.pyplot as plt
 
 def scatter():
     """we will have normal distribution kkind of plot"""
