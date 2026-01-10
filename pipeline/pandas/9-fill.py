@@ -3,9 +3,9 @@
 
 
 def fill(df):
-    """first we will change close, and then depending on that we will change the others"""
+    """first we will adjust close, and then build otherss using that one"""
     df = df.drop(columns=['Weighted_Price'])
-    df['Close'] = df['Close'].ffill(df['Close'])
+    df['Close'] = df['Close'].ffill()
     df['Open'] = df['Open'].fillna(df['Close'])
     df['Low'] = df['Low'].fillna(df['Close'])
     df['High'] = df['High'].fillna(df['Close'])
