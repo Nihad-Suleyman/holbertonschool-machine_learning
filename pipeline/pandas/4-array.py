@@ -4,4 +4,4 @@
 
 def array(df):
     """convert DataFrame to array"""
-    return df.tail(10)[["High", "CLose"]].to_numpy()
+    return df[["High", "Close"]].tail(10).to_numpy()
