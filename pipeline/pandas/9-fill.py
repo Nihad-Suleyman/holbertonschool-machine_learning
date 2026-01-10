@@ -5,7 +5,7 @@
 def fill(df):
     """first we will change close, and then depending on that we will change the others"""
     df = df.drop(columns=['Weighted_Price'])
-    df['Close'] = df.ffill(df['Close'])
+    df['Close'] = df['Close'].ffill(df['Close'])
     df['Open'] = df['Open'].fillna(df['Close'])
     df['Low'] = df['Low'].fillna(df['Close'])
     df['High'] = df['High'].fillna(df['Close'])
