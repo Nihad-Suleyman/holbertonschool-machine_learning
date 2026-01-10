@@ -4,7 +4,7 @@
 
 def array(df):
     """convert DataFrame to array"""
-    df = pd.DataFrame()
+    df = pd.DataFrame(df)
     df.columns = ['High', 'Close']
     DataFrame = df.tail(10)
     DataFrame = DataFrame[["High", "Close"]]
