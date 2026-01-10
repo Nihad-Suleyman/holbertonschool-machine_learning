@@ -2,9 +2,6 @@
 """it is time to look at swtiching to numpy"""
 
 
-import pandas as pd
-
-
 def array(df):
     """convert DataFrame to array"""
     df = pd.DataFrame()
