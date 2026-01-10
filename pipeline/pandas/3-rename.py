@@ -7,8 +7,8 @@ import pandas as pd
 
 def rename(df):
     """create a DataFrame from a file"""
-    df = df.rename(columns={'Timestamp': 'DateTime'})
-    df['DateTime'] = pd.to_datetime(df['DateTime'], unit='s')
-    df = df[['DateTime', 'Close']]
+    df = df.rename(columns={'Timestamp': 'Datetime'})
+    df['Datetime'] = pd.to_datetime(df['Datetime'], unit='s')
+    df = df[['Datetime', 'Close']]
 
     return df
