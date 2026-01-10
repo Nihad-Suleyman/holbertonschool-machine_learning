@@ -4,6 +4,7 @@
 
 import pandas as pd
 
+
 def from_numpy(array):
     """let's assign our df"""
     df = pd.DataFrame(array)
