@@ -19,6 +19,7 @@ def two():
     plt.figure(figsize=(6.4, 4.8))
     plt.plot(x, y1, 'r--', label='C-14')
     plt.plot(x, y2, 'g-', label='Ra-226')
+    plt.legend()
     plt.ylabel('Fraction Remaining')
     plt.xlim(0, 20000)
     plt.ylim(0, 1)
