@@ -4,4 +4,4 @@
 
 def analyze(df):
     """just one line of code which is describing"""
-    return df.describe()
+    return df.drop(columns=['Timestamp']).describe()
