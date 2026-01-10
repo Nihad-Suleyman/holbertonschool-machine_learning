@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
+"""let's create dataframe using the n dimensional array"""
+
 
 import pandas as pd
-"""let's start with creating function"""
-
 
 def from_numpy(array):
     """let's assign our df"""
