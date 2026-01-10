@@ -8,8 +8,8 @@ index = __import__('10-index').index
 
 def concat(df1, df2):
     """we will set indexes of both dfs and then concatenate"""
-    df1 = df1.set_index('Timestamp')
-    df2 = df2.set_index('Timestamp')
+    df1 = index(df1)
+    df2 = index(df2)
     df2 = df2.loc[:1417411920]
-    df = pd.concat([df2, df1], keys=['bitsmap', 'coinbase'])
+    df = pd.concat([df2, df1], keys=['bitstamp', 'coinbase'])
     return df
