@@ -4,6 +4,6 @@
 
 def flip_switch(df):
     """Docstring for flip_switch"""
-    df.sort_index(ascending=False)
+    df = df.sort_index(ascending=False)
     df.columns, df.rows = df.rows, df.columns
     return df
