@@ -4,4 +4,4 @@
 
 def slice(df):
     """we will now look at one type of slicing in pandas"""
-    return df[['High', 'Low', 'Close', 'Volume_BTC']].iloc[::60]
+    return df[['High', 'Low', 'Close', 'Volume_(BTC)']].iloc[::60]
