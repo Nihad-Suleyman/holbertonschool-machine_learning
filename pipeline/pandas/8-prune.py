@@ -4,4 +4,4 @@
 
 def prune(df):
     """we are looking for null values of close"""
-    return df[notnull(df['Close'])]
+    return df.dropna(subset=['Close'], axis=0)
