@@ -4,7 +4,7 @@
 
 def poly_integral(poly, C=0):
     """We will return the list of coefficients of an integral"""
-    if (not isinstance(poly, int)) or (not isinstance(C, int)):
+    if (not isinstance(poly, list)) or (not isinstance(C, int)):
         return None
     new_poly = [C]
     for i in range(1, len(poly)):
