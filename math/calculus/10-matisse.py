@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Computing the coefficents of a derrivative of polynomial."""
 
+
 def poly_derivative(poly):
     """We will use list."""
     if not isinstance(poly, list) or len(poly) <= 0:
