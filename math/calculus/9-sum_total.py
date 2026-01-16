@@ -4,7 +4,7 @@
 
 def summation_i_squared(n):
     """we will sum the square of numbers"""
-    if !isnum(n):
+    if !isinstance(n):
         return None
     if n == 1:
         return 1
