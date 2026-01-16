@@ -8,5 +8,5 @@ def poly_integral(poly, C=0):
         return None
     new_poly = [C]
     for i in range(1, len(poly)):
-        new_poly.append(poly[i - 1] / (i - 1))
+        new_poly.append(poly[i - 1] / (i))
     return new_poly
