@@ -3,7 +3,7 @@
 
 
 def poly_integral(poly, C=0):
-    """Return the integral of a polynomial represented by a list of coefficients."""
+    """Return the integral of a polynomial list of coefficients."""
     if not isinstance(poly, list) or len(poly) == 0 or not isinstance(C, int):
         return None
     for coeff in poly:
