@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""now we will use calculus knowledge in python"""
+"""Compute sum_{i=1}^n i^2 without loops."""
 
 
 def summation_i_squared(n):
-    """we will sum the square of numbers"""
-    if isinstance(n, int) == False:
+    """Return sum of squares from 1 to n, or None if n is invalid."""
+    if not isinstance(n, int) or n <= 0:
         return None
     if n == 1:
         return 1
-    return n * n + summation_i_squared(n-1)
+    return n * n + summation_i_squared(n - 1)
