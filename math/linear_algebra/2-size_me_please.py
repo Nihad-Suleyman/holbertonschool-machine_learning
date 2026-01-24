@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""We will look at how to print the shapes of matrix"""
+
+
 def matrix_shape(matrix):
     """Okay, so we will look at how to go deep down of matrix size"""
     if not isinstance(matrix, list):
