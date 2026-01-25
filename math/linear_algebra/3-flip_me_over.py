@@ -13,4 +13,3 @@ def matrix_transpose(matrix):
             rowlist.append(matrix[i][j])
         new.append(rowlist)
     return new
-            
