@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """now an advanced task"""
-import numpy as np
 
 
 def np_slice(matrix, axes={}):
