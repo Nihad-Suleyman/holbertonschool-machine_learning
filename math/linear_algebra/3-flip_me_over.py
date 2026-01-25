@@ -3,7 +3,7 @@
 
 
 def matrix_transpose(matrix):
-    """docs"""
+    """We will take some new lists and then transpose"""
     row = len(matrix)
     col = len(matrix[0])
     new = []
