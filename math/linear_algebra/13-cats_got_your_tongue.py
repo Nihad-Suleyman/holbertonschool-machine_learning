@@ -5,4 +5,4 @@ import numpy as np
 
 def np_cat(mat1, mat2, axis=0):
     """we will use as previous"""
-    return np.concatenate((mat1, mat2), axis = axis)
+    return np.concatenate((mat1, mat2), axis=axis)
