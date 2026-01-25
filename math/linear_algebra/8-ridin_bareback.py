@@ -7,5 +7,5 @@ def mat_mul(mat1, mat2):
     if len(mat1[0]) != len(mat2):
         return None
     mat2t = list(zip(*mat2))
-    return [[sum(a * b for a, b in zip(rows, cols)) for cols in mat2t] 
+    return [[sum(a * b for a, b in zip(rows, cols)) for cols in mat2t]
             for rows in mat1]
