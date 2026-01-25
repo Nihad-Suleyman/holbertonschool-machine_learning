@@ -4,4 +4,4 @@
 
 def np_shape(matrix):
     """this time we will use numpy"""
-    return np.shape(matrix)
+    return matrix.shape
