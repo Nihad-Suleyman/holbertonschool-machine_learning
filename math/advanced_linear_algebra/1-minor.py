@@ -26,6 +26,7 @@ def determinant(matrix):
         cnt += matrix[0][j] * (-1) ** j * determinant(minor)
     return cnt
 
+
 def minor(matrix):
     """Just like before but this time minor"""
     if isinstance(matrix, list) is False:
