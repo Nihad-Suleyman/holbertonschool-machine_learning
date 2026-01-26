@@ -7,16 +7,16 @@ def determinant(matrix):
     some exceptions"""
     if isinstance(matrix, list) == False:
         raise TypeError('matrix must be a list of lists')
+    if matrix == [[]]:
+        return 1
     for i in range(len(matrix)):
         if isinstance(matrix[i], list) == False:
             raise TypeError('matrix must be a list of lists')
         if len(matrix) != len(matrix[i]):
             raise ValueError('matrix must be a square matrix')
-    if matrix == [[]]:
-        return 1
-    elif len(matrix) == 1 and len(matrix[0]) == 1:
+    if len(matrix) == 1 and len(matrix[0]) == 1:
         return matrix[0][0]
-    elif len(matrix) == 2 and len(matrix[0]) == len(matrix[1]) == 2:
+    if len(matrix) == 2 and len(matrix[0]) == len(matrix[1]) == 2:
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
     cnt = 0
     for j in range(len(matrix)):
