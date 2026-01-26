@@ -57,4 +57,3 @@ def cofactor(matrix):
         cnt.append(row)
 
     return cnt
-
