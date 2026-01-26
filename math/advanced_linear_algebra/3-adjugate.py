@@ -61,14 +61,5 @@ def cofactor(matrix):
 
 def adjugate(matrix):
     """Just like the previous ones"""
-    if isinstance(matrix, list) is False:
-        raise TypeError('matrix must be a list of lists')
-    if matrix == [[]]:
-        raise ValueError('matrix must be a non-empty square matrix')
-    for i in range(len(matrix)):
-        if isinstance(matrix[i], list) is False:
-            raise TypeError('matrix must be a list of lists')
-        if len(matrix) != len(matrix[i]):
-            raise ValueError('matrix must be a non-empty square matrix')
     tr = list(zip(*cofactor(matrix)))
     return [list(row) for row in tr]
