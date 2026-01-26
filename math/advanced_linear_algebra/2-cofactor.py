@@ -43,14 +43,18 @@ def cofactor(matrix):
     if len(matrix) == 2 and len(matrix[0]) == len(matrix[1]) == 2:
         return [[matrix[1][1], -matrix[1][0]], [-matrix[0][1], matrix[0][0]]]
     cnt = []
-    for i in range(len(matrix)):
-        minor1 = []
-        for j in range(len(matrix)):
+    n = len(matrix)
+    for i in range(n):
+        row = []
+        for j in range(n):
             sub = []
-            for r in range(len(matrix)):
+            for r in range(n):
                 if r == i:
                     continue
-                sub.append((matrix[r][:j] + matrix[r][j+1:]))
-            minor1.append(determinant(sub))
-        cnt.append((-1)**(i + j)*minor1)
+                sub.append(matrix[r][:j] + matrix[r][j+1:])
+            m = determinant(sub)
+            row.append(((-1) ** (i + j)) * m)
+        cnt.append(row)
+
     return cnt
+
