@@ -5,12 +5,12 @@
 def determinant(matrix):
     """We will find the determinant, taking into conseideration
     some exceptions"""
-    if isinstance(matrix, list) == False:
+    if isinstance(matrix, list) is False:
         raise TypeError('matrix must be a list of lists')
     if matrix == [[]]:
         return 1
     for i in range(len(matrix)):
-        if isinstance(matrix[i], list) == False:
+        if isinstance(matrix[i], list) is False:
             raise TypeError('matrix must be a list of lists')
         if len(matrix) != len(matrix[i]):
             raise ValueError('matrix must be a square matrix')
