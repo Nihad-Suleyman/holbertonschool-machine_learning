@@ -1,0 +1,1 @@
+At this folder we will look advanced linear algebra. We will focus on more topics like eigenvalues and vectors, determinants and others.
