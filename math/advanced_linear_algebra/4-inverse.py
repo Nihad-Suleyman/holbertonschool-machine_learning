@@ -75,17 +75,3 @@ def inverse(matrix):
         adj = [[co[i][j] for i in range(len(co))] for j in range(len(co))]
         inv = [[adj[i][j] / det for j in range(len(adj))] for i in range(len(adj))]
         return inv
-    
-    
-    
-mat1 = [[5]]
-mat2 = [[1, 2], [3, 4]]
-mat3 = [[1, 1], [1, 1]]
-mat4 = [[5, 7, 9], [3, 1, 8], [6, 2, 4]]
-mat5 = []
-mat6 = [[1, 2, 3], [4, 5, 6]]
-
-print(inverse(mat1))
-print(inverse(mat2))
-print(inverse(mat3))
-print(inverse(mat4))
