@@ -5,20 +5,20 @@ import numpy as np
 
 def definiteness(matrix):
     """This funnction is for checking definiteness"""
-    if isinstance(matrix, list) is False:
-        raise TypeError('matrix must be a list of lists')
-    if matrix == [[]]:
-        raise ValueError('matrix must be a non-empty square matrix')
+    if isinstance(matrix, np.ndarray) is False:
+        raise TypeError('matrix must be a numpy.ndarray')
+    if matrix.shape[0] == 0 or matrix.shape[1] == 0:
+        return None
     for i in range(len(matrix)):
-        if isinstance(matrix[i], list) is False:
-            raise TypeError('matrix must be a list of lists')
+        if isinstance(matrix[i], np.ndarray) is False:
+            raise TypeError('matrix must be a numpy.ndarray')
         if len(matrix) != len(matrix[i]):
-            raise ValueError('matrix must be a non-empty square matrix')
+            return None
         n = len(matrix)
         for i in range(n):
             for j in range(n):
                 if matrix[i][j] != matrix[j][i]:
-                    raise ValueError('matrix must be symmetric')
+                    return None
         arr = np.array(matrix)
         eigvals = np.linalg.eigvals(arr)
         if np.all(eigvals > 0):
