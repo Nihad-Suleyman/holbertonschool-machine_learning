@@ -26,7 +26,7 @@ class Poisson:
         term = 1
         for i in range(1, k + 1):
             fact *= i
-        for i in range(1, 100):
+        for i in range(1, 1000):
             term *= (-self.lambtha) / i
             ex += term
         return ex * self.lambtha ** k / fact
