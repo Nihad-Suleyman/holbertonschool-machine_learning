@@ -15,7 +15,6 @@ class Poisson:
         else:
             if lambtha <= 0:
                 raise ValueError('lambtha must be a positive value')
-            
         self.lambtha = float(lambtha)
         # fact = 1
         # for i in range(1, len(data)+1):
