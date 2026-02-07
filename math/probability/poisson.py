@@ -15,7 +15,7 @@ class Poisson:
             if lambtha <= 0:
                 raise ValueError('lambtha must be a positive value')
         self.lambtha = float(lambtha)
-        
+
     def pmf(self, k):
         """We will calculate the PMF of poisson"""
         if not isinstance(k, int):
@@ -28,5 +28,4 @@ class Poisson:
         factorial_part = 1
         for i in range(1, k + 1):
             factorial_part *= (self.lambtha / i)
-            
         return exp_neg_lambtha * factorial_part
