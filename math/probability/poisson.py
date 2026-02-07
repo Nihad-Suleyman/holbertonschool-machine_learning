@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """We will look at poisson distribution"""
-import math
 
 class Poisson:
     """poisson class"""
@@ -23,7 +22,12 @@ class Poisson:
             k = int(k)
         if k < 0:
             return 0
-        fact = 1
+        fact, ex = 1, 0
         for i in range(1, k + 1):
             fact *= i
-        return math.exp(-self.lambtha) * self.lambtha ** k / fact
+        for i in range(0, 21):
+            factorial = 1
+            for j in range(1, i + 1):
+                factorial *= j
+            ex += i ** self.lambtha / factorial
+        return ex * self.lambtha ** k / fact
