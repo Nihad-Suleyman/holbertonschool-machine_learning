@@ -22,7 +22,7 @@ class Poisson:
             k = int(k)
         if k < 0:
             return 0
-        fact, ex = 1, 0
+        fact, ex = 1, 1
         for i in range(1, k + 1):
             fact *= i
         for i in range(1, 100):
