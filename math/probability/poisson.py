@@ -29,5 +29,5 @@ class Poisson:
             factorial = 1
             for j in range(1, i + 1):
                 factorial *= j
-            ex += i ** self.lambtha / factorial
-        return ex ** (-self.lambtha) * self.lambtha ** k / fact
+            ex += self.lambdha ** i / factorial
+        return ex * self.lambtha ** k / fact
