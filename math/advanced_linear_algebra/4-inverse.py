@@ -75,6 +75,6 @@ def inverse(matrix):
             return None
         co = cofactor(matrix)
         adj = [[co[i][j] for i in range(len(co))] for j in range(len(co))]
-        inv = [[adj[i][j] / det for j in range(len(adj))] 
+        inv = [[adj[i][j] / det for j in range(len(adj))]
                for i in range(len(adj))]
         return inv
