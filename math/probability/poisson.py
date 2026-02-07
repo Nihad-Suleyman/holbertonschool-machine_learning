@@ -23,13 +23,10 @@ class Poisson:
         if k < 0:
             return 0
         fact, ex = 1, 1
-        term = 1
+        e = 2.7182818285
+        exp_neg_lambtha = e ** -self.lambtha
+        factorial_part = 1
         for i in range(1, k + 1):
-            fact *= i
-        for i in range(1, 1000):
-            term *= (-self.lambtha) / i
-            ex += term
-        p = ex
-        for i in range(1, k + 1):
-            p *= self.lambtha / i
-        return p
+            factorial_part *= (self.lambtha / i)
+            
+        return exp_neg_lambtha * factorial_part
