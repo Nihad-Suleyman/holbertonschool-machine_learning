@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """We will look at poisson distribution"""
-
+import math
 
 class Poisson:
     """poisson class"""
@@ -16,7 +16,14 @@ class Poisson:
             if lambtha <= 0:
                 raise ValueError('lambtha must be a positive value')
         self.lambtha = float(lambtha)
-        # fact = 1
-        # for i in range(1, len(data)+1):
-        #     fact *= data
-        # return math.exp(-lambtha) * lambtha ** len(data) / fact
+        
+    def pmf(self, k):
+        """We will calculate the PMF of poisson"""
+        if not isinstance(k, int):
+            k = int(k)
+        if k < 0:
+            return 0
+        fact = 1
+        for i in range(1, k + 1):
+            fact *= i
+        return math.exp(-self.lambtha) * self.lambtha ** k / fact
