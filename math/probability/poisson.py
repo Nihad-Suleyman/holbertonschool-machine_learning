@@ -25,7 +25,7 @@ class Poisson:
         fact, ex = 1, 0
         for i in range(1, k + 1):
             fact *= i
-        for i in range(0, 35):
+        for i in range(0, 100):
             factorial = 1
             for j in range(1, i + 1):
                 factorial *= j
