@@ -23,10 +23,10 @@ class Poisson:
         if k < 0:
             return 0
         fact, ex = 1, 1
+        term = 1
         for i in range(1, k + 1):
             fact *= i
         for i in range(1, 100):
-            term = 1
             term *= (-self.lambtha) / i
             ex += term
         return ex * self.lambtha ** k / fact
