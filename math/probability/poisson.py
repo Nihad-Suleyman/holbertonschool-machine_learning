@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """We will look at poisson distribution"""
 
+
 class Poisson:
     """poisson class"""
     def __init__(self, data=None, lambtha=1.):
