@@ -17,10 +17,10 @@ def likelihood(x, n, P):
         raise ValueError('All values in P must be in the range [0, 1]')
     factn, factk, factnk = 1, 1, 1
     for i in range(1, n + 1):
-            factn *= i
-    for i in range(1, x + 1):
-            factk *= i
-    for i in range(1, n + 1 - x):
-            factnk *= i
-    return np.array([factn / (factk * factnk) * p ** x * \
-            ((1 - p) ** (n - x)) for p in P])
+        factn *= i
+    for j in range(1, x + 1):
+        factk *= j
+    for k in range(1, n + 1 - x):
+        factnk *= k
+    return np.array([factn / (factk * factnk) * p ** x * ((1 - p) ** (n - x)) 
+                     for p in P])
