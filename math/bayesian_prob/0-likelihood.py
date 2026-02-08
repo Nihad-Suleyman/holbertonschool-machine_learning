@@ -4,6 +4,7 @@ import numpy as np
 
 
 def likelihood(x, n, P):
+    """we will use bayesian"""
     if not isinstance(n, int) or n <= 0:
         raise ValueError('n must be a positive integer')
     if not isinstance(x, int) or x < 0:
@@ -12,9 +13,8 @@ def likelihood(x, n, P):
         raise ValueError('x cannot be greater than n')
     if not isinstance(P, np.ndarray):
         raise TypeError('P must be a 1D numpy.ndarray')
-    for i in P:
-        if i < 0 or i > 1:
-            raise ValueError('All values in P must be in range [0, 1]')
+    if np.any((P < 0) | (P > 1)):
+        raise ValueError('All values in P must be in range [0, 1]')
     factn, factk, factnk = 1, 1, 1
     for i in range(1, n + 1):
             factn *= i
