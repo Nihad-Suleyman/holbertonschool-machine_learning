@@ -4,7 +4,7 @@
 
 class Normal:
     """Normal distribution"""
-    pi = 3.141592654
+    pi = 3.1415926536
     e = 2.7182818285
     def __init__(self, data=None, mean=0., stddev=1.):
         """first initialization step"""
