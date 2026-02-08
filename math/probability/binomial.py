@@ -23,3 +23,14 @@ class Binomial:
                 raise ValueError('p must be greater than 0 and less than 1')
         self.n = round(n)
         self.p = float(p)
+
+    def pmf(self, k):
+        """probability mass function"""
+        factn, factk, factnk = 1, 1, 1
+        for i in range(1, self.n + 1):
+            factn *= i
+        for i in range(1, k + 1):
+            factk *= k
+        for i in range(1, self.n + 1 - k):
+            factnk *= i
+        return factn / (factk * factnk) * self.p ** k * (1 - self.p) ** (self.n - k)
