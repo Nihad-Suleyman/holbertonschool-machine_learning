@@ -30,3 +30,14 @@ class Poisson:
         for i in range(1, k + 1):
             factorial_part *= (self.lambtha / i)
         return exp_neg_lambtha * factorial_part
+
+    def cdf(self, k):
+        """Now we will calculate the cumulative prob."""
+        if not isinstance(k, int):
+            k = int(k)
+        if k < 0:
+            return 0
+        cnt = 0
+        for i in range(k + 1):
+            cnt += self.pmf(i)
+        return cnt
