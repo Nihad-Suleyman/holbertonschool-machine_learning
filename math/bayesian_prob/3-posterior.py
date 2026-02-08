@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""We will now look at marginals"""
+"""We will now look at posterior"""
 import numpy as np
 
 
-def marginal(x, n, P, Pr):
-    """This time marginals"""
+def posterior(x, n, P, Pr):
+    """This time posterior"""
     if not isinstance(n, int) or n <= 0:
         raise ValueError('n must be a positive integer')
     if not isinstance(x, int) or x < 0:
