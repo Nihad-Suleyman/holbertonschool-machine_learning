@@ -22,5 +22,5 @@ def likelihood(x, n, P):
             factk *= i
     for i in range(1, n + 1 - x):
             factnk *= i
-    return np.array(factn / (factk * factnk) * p ** x * \
-            (1 - p) ** (n - x) for p in P)
+    return np.array([factn / (factk * factnk) * p ** x * \
+            (1 - p) ** (n - x)] for p in P)
