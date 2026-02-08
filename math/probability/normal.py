@@ -26,3 +26,9 @@ class Normal:
     def x_value(self, z):
         """x value"""
         return z * self.stddev + self.mean
+
+    def pdf(self, x):
+        """probability density funtion of Normal"""
+        pi = 3.1416
+        e = 2.7182818285
+        return (1 / (2 * pi) ** 0.5) * e ** ((-1/2 * (x - self.mean) / self.stddev) ** 2)
