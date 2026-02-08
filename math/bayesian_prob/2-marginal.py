@@ -31,4 +31,4 @@ def marginal(x, n, P, Pr):
         factnk *= k
     like = np.array([factn / (factk * factnk) * p ** x * ((1 - p) ** (n - x))
                      for p in P])
-    return sum(i for like[i] * Pr[i] in range(len(Pr)))
+    return sum(like[i] * Pr[i] for i in range(len(Pr)))
