@@ -47,6 +47,6 @@ class Binomial:
         if k < 0:
             return 0
         cnt = 0
-        for i in range(0, k):
+        for i in range(0, k + 1):
             cnt += self.pmf(i)
         return cnt
