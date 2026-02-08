@@ -12,7 +12,7 @@ class Normal:
             if len(data) < 2:
                 raise ValueError('data must contain multiple values')
             mean = sum(i for i in data) / len(data)
-            stddev = (sum((i - mean) / len(data) for i in data)) ** 0.5
+            stddev = (sum((i - mean) ** 2 / len(data) for i in data)) ** 0.5
         else:
             if stddev <= 0:
                 raise ValueError('stddev must be a positive value')
