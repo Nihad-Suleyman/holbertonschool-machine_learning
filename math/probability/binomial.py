@@ -34,7 +34,7 @@ class Binomial:
         for i in range(1, self.n + 1):
             factn *= i
         for i in range(1, k + 1):
-            factk *= k
+            factk *= i
         for i in range(1, self.n + 1 - k):
             factnk *= i
         return factn / (factk * factnk) * self.p ** k * (1 - self.p) ** (self.n - k)
