@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """We will look at normal distribution"""
-import numpy as np
+
 
 class Normal:
     """Normal distribution"""
