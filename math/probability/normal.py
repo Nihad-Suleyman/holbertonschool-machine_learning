@@ -43,7 +43,7 @@ class Normal:
         a5 = 1.061405429
         p = 0.3275911
         e = 2.718281828459045
-        z = (x - self.mean) / (self.stddev * (2 ** 0.5))
+        z = self.z_score(x)
         sign = 1
         if z < 0:
             sign = -1
