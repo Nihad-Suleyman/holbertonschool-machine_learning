@@ -39,3 +39,14 @@ class Binomial:
             factnk *= i
         return factn / (factk * factnk) * self.p ** k * \
             (1 - self.p) ** (self.n - k)
+
+    def cdf(self, k):
+        """cumulative density function"""
+        if not isinstance(k, int):
+            k = int(k)
+        if k < 0:
+            return 0
+        cnt = 0
+        for i in range(0, k):
+            cnt += self.pmf(i)
+        return cnt
