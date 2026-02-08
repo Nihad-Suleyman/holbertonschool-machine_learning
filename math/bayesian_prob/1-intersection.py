@@ -29,5 +29,6 @@ def intersection(x, n, P, Pr):
         factk *= j
     for k in range(1, n + 1 - x):
         factnk *= k
-    return np.array([factn / (factk * factnk) * p ** x * ((1 - p) ** (n - x))
+    like = np.array([factn / (factk * factnk) * p ** x * ((1 - p) ** (n - x))
                      for p in P])
+    return like * Pr
