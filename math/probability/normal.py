@@ -36,20 +36,19 @@ class Normal:
 
     def cdf(self, x):
         """Cumulative distribution function for a Normal distribution"""
+        a1 = 0.254829592
+        a2 = -0.284496736
+        a3 = 1.421413741
+        a4 = -1.453152027
+        a5 = 1.061405429
+        p = 0.3275911
         e = 2.718281828459045
-        p = 0.2316419
-        z = (x - self.mean) / self.stddev
-        abs_z = abs(z)
-        t = 1 / (1 + p * abs_z)
-        d = 0.3989422804014327 * (e ** (-abs_z * abs_z / 2))
-        poly = (
-            0.319381530 * t
-            - 0.356563782 * t**2
-            + 1.781477937 * t**3
-            - 1.821255978 * t**4
-            + 1.330274429 * t**5
-        )
-        cdf_pos = 1 - d * poly
+        z = (x - self.mean) / (self.stddev * (2 ** 0.5))
+        sign = 1
         if z < 0:
-            return 1 - cdf_pos
-        return cdf_pos
+            sign = -1
+        z = abs(z)
+        t = 1 / (1 + p * z)
+        poly = (((((a5 * t + a4) * t + a3) * t + a2) * t + a1) * t)
+        erf = sign * (1 - poly * (e ** (-z * z)))
+        return 0.5 * (1 + erf)
