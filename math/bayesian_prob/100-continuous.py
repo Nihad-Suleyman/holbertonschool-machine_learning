@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """1 advanced task"""
-from scipy.special import betainc
+from scipy import special
 
 
 def posterior(x, n, p1, p2):
@@ -19,7 +19,6 @@ def posterior(x, n, p1, p2):
         raise ValueError('p2 must be greater than p1')
     a = x + 1
     b = n - x + 1
-    cdf2 = betainc(a, b, p2)
-    cdf1 = betainc(a, b, p1)
+    cdf2 = special.betainc(a, b, p2)
+    cdf1 = special.betainc(a, b, p1)
     return cdf2 - cdf1
-    
