@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """We will look at normal distribution"""
-
+import numpy as np
 
 class Normal:
     """Normal distribution"""
@@ -42,13 +42,34 @@ class Normal:
         a4 = -1.453152027
         a5 = 1.061405429
         p = 0.3275911
-        e = 2.718281828459045
-        z = self.z_score(x)
-        sign = 1
-        if z < 0:
-            sign = -1
-        z = abs(z)
-        t = 1 / (1 + p * z)
-        poly = (((((a5 * t + a4) * t + a3) * t + a2) * t + a1) * t)
-        erf = sign * (1 - poly * (e ** (-z * z)))
-        return 0.5 * (1 + erf)
+        
+        # Using a precise constant for e
+        e = 2.7182818285
+        
+        # Calculate z-score: (x - mean) / stddev
+        z = (x - self.mean) / self.stddev
+        
+        # Save the sign of z for erf calculation
+        sign = 1 if z >= 0 else -1
+        abs_z = abs(z)
+        
+        # Abramowitz & Stegun approximation for erf(z)
+        t = 1.0 / (1.0 + p * abs_z)
+        poly = (a1 * t + a2 * t**2 + a3 * t**3 + a4 * t**4 + a5 * t**5)
+        
+        # erf(z) = sign * (1 - poly * e^(-z^2))
+        res_erf = sign * (1 - poly * (e ** -(abs_z**2)))
+        
+        # Normal CDF formula: 0.5 * (1 + erf(z / sqrt(2)))
+        # NOTE: The standard Normal CDF relates to erf via z / sqrt(2)
+        # However, the constants you chose are often used for a direct 
+        # approximation of the CDF. Let's adjust to the standard erf route:
+        
+        val = (x - self.mean) / (self.stddev * (2**0.5))
+        sign = 1 if val >= 0 else -1
+        v = abs(val)
+        t = 1.0 / (1.0 + p * v)
+        poly = (a1 * t + a2 * t**2 + a3 * t**3 + a4 * t**4 + a5 * t**5)
+        erf_val = sign * (1 - poly * (e ** -(v**2)))
+        
+        return 0.5 * (1 + erf_val)
