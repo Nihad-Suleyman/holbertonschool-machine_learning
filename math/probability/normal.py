@@ -33,3 +33,11 @@ class Normal:
         e = 2.7182818285
         return (1 / ((2 * pi) ** 0.5 * self.stddev)) *\
             e ** (-1/2 * ((x - self.mean) / self.stddev) ** 2)
+
+    def cdf(self, x):
+        """cumulative function of Normal"""
+        e = 2.7182818285
+        t = 1 / (1 + 0.2316419 * abs(x))
+        d = 0.3989423 * e(-x * x / 2)
+        p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.7814779 + t * (-1.8212560 + t * 1.3302744))))
+        return 1 - p
