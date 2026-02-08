@@ -6,6 +6,7 @@ class Normal:
     """Normal distribution"""
     pi = 3.1415926536
     e = 2.7182818285
+
     def __init__(self, data=None, mean=0., stddev=1.):
         """first initialization step"""
         if data is not None:
@@ -31,7 +32,6 @@ class Normal:
 
     def pdf(self, x):
         """probability density funtion of Normal"""
-        
         return (1 / ((2 * Normal.pi) ** 0.5 * self.stddev)) *\
             Normal.e ** (-1/2 * ((x - self.mean) / self.stddev) ** 2)
 
