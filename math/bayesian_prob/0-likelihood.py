@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """We will look at likelihood of some disease"""
+import numpy as np
 
 
 def likelihood(x, n, P):
@@ -9,7 +10,7 @@ def likelihood(x, n, P):
         raise ValueError('x must be an integer that is greater than or equal to 0')
     if x > n:
         raise ValueError('x cannot be greater than n')
-    if not isinstance(P, numpy.ndarray):
+    if not isinstance(P, np.ndarray):
         raise TypeError('P must be a 1D numpy.ndarray')
     for i in P:
         if i < 0 or i > 1:
