@@ -26,6 +26,10 @@ class Binomial:
 
     def pmf(self, k):
         """probability mass function"""
+        if not isinstance(k, int):
+            k = int(k)
+        if k < 0:
+            return 0
         factn, factk, factnk = 1, 1, 1
         for i in range(1, self.n + 1):
             factn *= i
