@@ -31,5 +31,5 @@ class Normal:
         """probability density funtion of Normal"""
         pi = 3.141592654
         e = 2.7182818285
-        return (1 / ((2 * pi) ** 0.5 * self.stddev)) \
-        * e ** (-1/2 * ((x - self.mean) / self.stddev) ** 2)
+        return (1 / ((2 * pi) ** 0.5 * self.stddev)) *\
+        e ** (-1/2 * ((x - self.mean) / self.stddev) ** 2)
