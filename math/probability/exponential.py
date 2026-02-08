@@ -16,3 +16,10 @@ class Exponential:
             if lambtha <= 0:
                 raise ValueError('lambtha must be a positive value')
         self.lambtha = float(lambtha)
+
+    def pdf(self, x):
+        """calculating probability density funtion"""
+        if x < 0:
+            return 0
+        e = 2.7182818285
+        return self.lambtha * e ** (-self.lambtha * x)
