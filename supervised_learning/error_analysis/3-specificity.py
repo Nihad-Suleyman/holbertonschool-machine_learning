@@ -15,7 +15,7 @@ def specificity(confusion):
     col_sum = np.sum(confusion, axis=0)
     false_positives = col_sum - true_positives
     false_negatives = row_sum - true_positives
-    true_negatives = total - (true_positives + false_positives +\
-        false_negatives)
+    true_negatives = total - (true_positives + false_positives +
+    false_negatives)
 
     return true_negatives / (true_negatives + false_positives)
