@@ -1,0 +1,1 @@
+In this folder we will look at bayesian probability exercises.
