@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+"""another decision tree."""
+
+
 class Decision_Tree:
     """Represents a decision tree."""
 
