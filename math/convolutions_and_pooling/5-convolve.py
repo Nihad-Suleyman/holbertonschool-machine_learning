@@ -33,7 +33,7 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
             w_end = w_start + kw
             current = padded[:, h_start:h_end, w_start:w_end, :]
             output[:, i, j, :] = np.sum(
-                current[:, :, :, np.newaxis] * kernels,
+                current[..., np.newaxis] * kernels,
                 axis=(1, 2, 3)
             )
 
