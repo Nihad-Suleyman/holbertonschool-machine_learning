@@ -7,8 +7,8 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
     """
     performs a convolution on images using multiple kernels
     """
-    m, h, w = images.shape
-    kh, kw, nc = kernels.shape
+    m, h, w, c = images.shape
+    kh, kw, kc, nc = kernels.shape
     sh, sw = stride
     if padding == 'same':
         ph = int(np.ceil((((h - 1) * sh + kh - h) / 2)))
@@ -31,6 +31,7 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
             h_end = h_start + kh
             w_start = j * sw
             w_end = w_start + kw
+
             current = padded[:, h_start:h_end, w_start:w_end, :]
             output[:, i, j, :] = np.sum(
                 current[..., np.newaxis] * kernels,
