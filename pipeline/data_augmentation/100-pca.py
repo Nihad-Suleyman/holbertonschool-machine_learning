@@ -5,24 +5,23 @@ import tensorflow as tf
 
 def pca_color(image, alphas):
     """Performs PCA color augmentation"""
+
     image = tf.cast(image, tf.float32)
-    original_shape = image.shape
-    pixels = tf.reshape(image, (-1, 3))
-    mean = tf.reduce_mean(pixels, axis=0)
-    centered = pixels - mean
-    num_pixels = tf.cast(tf.shape(centered)[0], tf.float32)
-    cov = tf.matmul(centered, centered, transpose_a=True) / num_pixels
-    eigvals, eigvecs = tf.linalg.eigh(cov)
-    idx = tf.argsort(eigvals, direction='DESCENDING')
-    eigvals = tf.gather(eigvals, idx)
-    eigvecs = tf.gather(eigvecs, idx, axis=1)
+    eigvals = tf.constant([0.2175, 0.0188, 0.0045], dtype=tf.float32)
+
+    eigvecs = tf.constant([
+        [-0.5675, 0.7192, 0.4009],
+        [-0.5808, -0.0045, -0.8140],
+        [-0.5836, -0.6948, 0.4203]
+    ], dtype=tf.float32)
+
     alphas = tf.convert_to_tensor(alphas, dtype=tf.float32)
+
     delta = tf.matmul(
         eigvecs,
         tf.reshape(alphas * eigvals, (3, 1))
     )
-    delta = tf.reshape(delta, (1, 3))
-    augmented = pixels + delta
-    augmented = tf.reshape(augmented, original_shape)
 
-    return augmented
+    delta = tf.reshape(delta, (1, 1, 3))
+
+    return image + delta
