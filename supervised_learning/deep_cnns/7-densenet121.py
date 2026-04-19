@@ -16,8 +16,8 @@ def densenet121(growth_rate=32, compression=1.0):
     X_input = K.Input(shape=(224, 224, 3))
 
     X = K.layers.BatchNormalization(axis=3)(X_input)
-    X = K.layers.Activation('relu')(X)
-    X = K.layers.Conv2D(filters=2 * growth_rate,
+    X = K.layers.ReLU()(X)
+    X = K.layers.Conv2D(2 * growth_rate,
                         kernel_size=(7, 7),
                         strides=(2, 2),
                         padding='same',
@@ -28,27 +28,25 @@ def densenet121(growth_rate=32, compression=1.0):
 
     nb_filters = 2 * growth_rate
 
-    X, nb_filters = dense_block(X, nb_filters, growth_rate, layers=6)
+    X, nb_filters = dense_block(X, nb_filters, growth_rate, 6)
     X, nb_filters = transition_layer(X, nb_filters, compression)
 
-    X, nb_filters = dense_block(X, nb_filters, growth_rate, layers=12)
+    X, nb_filters = dense_block(X, nb_filters, growth_rate, 12)
     X, nb_filters = transition_layer(X, nb_filters, compression)
 
-    X, nb_filters = dense_block(X, nb_filters, growth_rate, layers=24)
+    X, nb_filters = dense_block(X, nb_filters, growth_rate, 24)
     X, nb_filters = transition_layer(X, nb_filters, compression)
 
-    X, nb_filters = dense_block(X, nb_filters, growth_rate, layers=16)
+    X, nb_filters = dense_block(X, nb_filters, growth_rate, 16)
 
     X = K.layers.BatchNormalization(axis=3)(X)
-    X = K.layers.Activation('relu')(X)
+    X = K.layers.ReLU()(X)
     X = K.layers.AveragePooling2D(pool_size=(7, 7),
-                                  strides=(1, 1),
-                                  padding='valid')(X)
+                                  strides=(1, 1))(X)
 
-    X = K.layers.Dense(units=1000,
+    X = K.layers.Dense(1000,
                        activation='softmax',
                        kernel_initializer=init)(X)
 
     model = K.Model(inputs=X_input, outputs=X)
-
     return model
