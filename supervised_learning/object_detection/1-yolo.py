@@ -18,7 +18,7 @@ class Yolo:
         self.anchors = anchors
 
     def process_outputs(self, outputs, image_size):
-        """Process Darknet model outputs"""
+        """Process the outputs from the Darknet model"""
         boxes = []
         box_confidences = []
         box_class_probs = []
@@ -26,40 +26,44 @@ class Yolo:
         input_h = self.model.input.shape[1]
         input_w = self.model.input.shape[2]
 
-        img_h, img_w = image_size
+        image_h = image_size[0]
+        image_w = image_size[1]
 
         for i, output in enumerate(outputs):
-            grid_h, grid_w, anchor_boxes, _ = output.shape
+            grid_h = output.shape[0]
+            grid_w = output.shape[1]
+            anchor_boxes = output.shape[2]
 
-            t_xy = output[..., 0:2]
-            t_wh = output[..., 2:4]
+            box = output[..., 0:4].copy()
 
-            confidence = 1 / (1 + np.exp(-output[..., 4:5]))
-            class_probs = 1 / (1 + np.exp(-output[..., 5:]))
+            box_confidence = 1 / (1 + np.exp(-output[..., 4:5]))
+            box_class_prob = 1 / (1 + np.exp(-output[..., 5:]))
 
-            cx = np.arange(grid_w).reshape(1, grid_w, 1)
-            cy = np.arange(grid_h).reshape(grid_h, 1, 1)
+            col = np.arange(grid_w).reshape(1, grid_w, 1)
+            row = np.arange(grid_h).reshape(grid_h, 1, 1)
 
-            bx = (1 / (1 + np.exp(-t_xy[..., 0])) + cx) / grid_w
-            by = (1 / (1 + np.exp(-t_xy[..., 1])) + cy) / grid_h
+            box[..., 0] = (1 / (1 + np.exp(-box[..., 0])) + col) / grid_w
+            box[..., 1] = (1 / (1 + np.exp(-box[..., 1])) + row) / grid_h
 
-            anchors = self.anchors[i]
-            bw = anchors[:, 0] * np.exp(t_wh[..., 0]) / input_w
-            bh = anchors[:, 1] * np.exp(t_wh[..., 1]) / input_h
+            box[..., 2] = (
+                np.exp(box[..., 2]) * self.anchors[i, :, 0]
+            ) / input_w
+            box[..., 3] = (
+                np.exp(box[..., 3]) * self.anchors[i, :, 1]
+            ) / input_h
 
-            x1 = (bx - bw / 2) * img_w
-            y1 = (by - bh / 2) * img_h
-            x2 = (bx + bw / 2) * img_w
-            y2 = (by + bh / 2) * img_h
+            x1 = (box[..., 0] - box[..., 2] / 2) * image_w
+            y1 = (box[..., 1] - box[..., 3] / 2) * image_h
+            x2 = (box[..., 0] + box[..., 2] / 2) * image_w
+            y2 = (box[..., 1] + box[..., 3] / 2) * image_h
 
-            box = np.zeros_like(output[..., 0:4])
             box[..., 0] = x1
             box[..., 1] = y1
             box[..., 2] = x2
             box[..., 3] = y2
 
             boxes.append(box)
-            box_confidences.append(confidence)
-            box_class_probs.append(class_probs)
+            box_confidences.append(box_confidence)
+            box_class_probs.append(box_class_prob)
 
         return boxes, box_confidences, box_class_probs
