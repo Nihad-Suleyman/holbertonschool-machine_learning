@@ -7,7 +7,7 @@ def HP(Di, beta):
     """
     Calculates Shannon entropy and P affinities relative to a data point.
     """
-    beta = beta[0]
+    beta = float(beta)
 
     Pi = np.exp(-Di * beta)
     sum_Pi = np.sum(Pi)
