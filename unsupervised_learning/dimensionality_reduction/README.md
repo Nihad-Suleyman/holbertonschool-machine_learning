@@ -1,0 +1,1 @@
+In thid folder we will lok at some dimensinality reduction tasks.
