@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+"""K-means using sklearn."""
+
+import numpy as np
+import sklearn.cluster
+
+
+def kmeans(X, k):
+    """Performs K-means on a dataset."""
+    model = sklearn.cluster.KMeans(n_clusters=k)
+    model.fit(X)
+
+    C = model.cluster_centers_
+    clss = model.labels_
+
+    return C, clss
