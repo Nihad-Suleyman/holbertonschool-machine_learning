@@ -41,9 +41,9 @@ def expectation(X, pi, m, S):
             return None, None
 
         g /= total
-        l = np.sum(np.log(total))
+        op = np.sum(np.log(total))
 
-        return g, l
+        return g, op
 
     except Exception:
         return None, None
