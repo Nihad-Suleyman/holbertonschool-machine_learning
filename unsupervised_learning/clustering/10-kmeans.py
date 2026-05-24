@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """K-means using sklearn."""
 
-import numpy as np
 import sklearn.cluster
 
 
