@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Find best number of clusters using BIC."""
+"""Find the best number of clusters using BIC."""
 
 import numpy as np
 
@@ -22,7 +22,7 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
     if not isinstance(kmax, int) or kmax <= 0:
         return None, None, None, None
 
-    if kmin >= kmax:
+    if kmax <= kmin:
         return None, None, None, None
 
     if not isinstance(iterations, int) or iterations <= 0:
@@ -50,14 +50,13 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
         log_likelihoods.append(l)
 
         p = (k * d) + (k * d * (d + 1) / 2) + (k - 1)
-        bic = p * np.log(n) - 2 * l
-        bics.append(bic)
+        bics.append((p * np.log(n)) - (2 * l))
 
     l = np.array(log_likelihoods)
     b = np.array(bics)
 
-    best_index = np.argmin(b)
-    best_k = kmin + best_index
-    best_result = results[best_index]
+    best_idx = np.argmin(b)
+    best_k = kmin + best_idx
+    best_result = results[best_idx]
 
     return best_k, best_result, l, b
