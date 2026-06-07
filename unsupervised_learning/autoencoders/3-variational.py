@@ -54,13 +54,13 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     reconstructed = decoder(z)
 
     auto = keras.Model(
-        inputs=encoder_input,
-        outputs=reconstructed
+    inputs=encoder_input,
+    outputs=reconstructed
     )
 
     auto.compile(
         optimizer='adam',
-        loss='binary_crossentropy'
+        loss=keras.losses.binary_crossentropy
     )
 
     return encoder, decoder, auto
