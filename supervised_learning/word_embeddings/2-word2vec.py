@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""
-Train Word2Vec model
-"""
-
+"""A module that creates a Word2Vec model"""
 import gensim
 
 
@@ -25,6 +22,7 @@ def word2vec_model(sentences, vector_size=100, min_count=5, window=5,
     Returns:
         The trained Word2Vec model
     """
+
     model = gensim.models.Word2Vec(
         sentences=sentences,
         vector_size=vector_size,
@@ -34,8 +32,7 @@ def word2vec_model(sentences, vector_size=100, min_count=5, window=5,
         sg=0 if cbow else 1,
         epochs=epochs,
         seed=seed,
-        workers=workers,
-        shrink_windows=False
+        workers=workers
     )
 
     return model
