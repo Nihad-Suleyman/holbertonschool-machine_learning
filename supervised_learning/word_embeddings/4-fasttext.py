@@ -16,7 +16,7 @@ def fasttext_model(sentences, vector_size=100, min_count=5, negative=5,
         vector_size: dimensionality of the embedding layer
         min_count: minimum number of occurrences of a word for training
         negative: size of negative sampling
-        window: maximum distance between the current and predicted word
+        window: maximum distance between current and predicted word
         cbow: True for CBOW, False for Skip-gram
         epochs: number of iterations to train over
         seed: seed for the random number generator
@@ -34,8 +34,7 @@ def fasttext_model(sentences, vector_size=100, min_count=5, negative=5,
         sg=0 if cbow else 1,
         epochs=epochs,
         seed=seed,
-        workers=workers,
-        shrink_windows=False
+        workers=workers
     )
 
     return model
