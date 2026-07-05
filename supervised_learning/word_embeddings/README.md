@@ -1,0 +1,1 @@
+We will look at NLP - word embeddings in this folder.

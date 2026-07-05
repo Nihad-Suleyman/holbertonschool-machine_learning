@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">BTC time series forecasting cover</title>
+  <desc id="desc">A simple Bitcoin forecasting cover with a line chart and model nodes.</desc>
+  <rect width="1200" height="630" fill="#101820"/>
+  <rect x="72" y="70" width="1056" height="490" rx="28" fill="#f7f7f2"/>
+  <g transform="translate(118 122)">
+    <text x="0" y="0" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700" fill="#101820">Forecasting BTC Price</text>
+    <text x="2" y="48" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#48515a">24 hours of market data -> next hour close price</text>
+  </g>
+  <g transform="translate(118 250)">
+    <line x1="0" y1="230" x2="720" y2="230" stroke="#ccd4d8" stroke-width="3"/>
+    <line x1="0" y1="0" x2="0" y2="230" stroke="#ccd4d8" stroke-width="3"/>
+    <polyline points="0,185 60,168 120,175 180,130 240,148 300,92 360,118 420,78 480,96 540,48 600,68 660,38 720,54" fill="none" stroke="#f2a900" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="0,198 60,183 120,188 180,151 240,160 300,121 360,134 420,102 480,114 540,82 600,92 660,72 720,80" fill="none" stroke="#1c7c7d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+    <text x="0" y="276" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#101820">real close price</text>
+    <rect x="178" y="257" width="36" height="8" fill="#f2a900" rx="4"/>
+    <text x="260" y="276" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#101820">model prediction</text>
+    <rect x="492" y="257" width="36" height="8" fill="#1c7c7d" rx="4"/>
+  </g>
+  <g transform="translate(895 212)">
+    <circle cx="80" cy="80" r="74" fill="#f2a900"/>
+    <circle cx="80" cy="80" r="54" fill="#101820" opacity="0.12"/>
+    <text x="80" y="104" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700" fill="#ffffff">BTC</text>
+    <g stroke="#1c7c7d" stroke-width="6" stroke-linecap="round">
+      <line x1="80" y1="184" x2="80" y2="238"/>
+      <line x1="30" y1="238" x2="130" y2="238"/>
+      <circle cx="30" cy="238" r="12" fill="#1c7c7d"/>
+      <circle cx="80" cy="238" r="12" fill="#1c7c7d"/>
+      <circle cx="130" cy="238" r="12" fill="#1c7c7d"/>
+    </g>
+  </g>
+</svg>

@@ -31,13 +31,13 @@ def load_exchange(path):
 def to_hourly(df):
     """Convert minute-level rows into one row per hour."""
     hourly = pd.DataFrame()
-    hourly["Open"] = df["Open"].resample("1H").first()
-    hourly["High"] = df["High"].resample("1H").max()
-    hourly["Low"] = df["Low"].resample("1H").min()
-    hourly["Close"] = df["Close"].resample("1H").last()
-    hourly["Volume_(BTC)"] = df["Volume_(BTC)"].resample("1H").sum()
-    hourly["Volume_(Currency)"] = df["Volume_(Currency)"].resample("1H").sum()
-    hourly["Weighted_Price"] = df["Weighted_Price"].resample("1H").mean()
+    hourly["Open"] = df["Open"].resample("1h").first()
+    hourly["High"] = df["High"].resample("1h").max()
+    hourly["Low"] = df["Low"].resample("1h").min()
+    hourly["Close"] = df["Close"].resample("1h").last()
+    hourly["Volume_(BTC)"] = df["Volume_(BTC)"].resample("1h").sum()
+    hourly["Volume_(Currency)"] = df["Volume_(Currency)"].resample("1h").sum()
+    hourly["Weighted_Price"] = df["Weighted_Price"].resample("1h").mean()
     return hourly.dropna()
 
 
@@ -74,21 +74,34 @@ def main():
 
     mean = train_data.mean()
     std = train_data.std().replace(0, 1)
+    target_mean = mean["Close"]
+    target_std = std["Close"]
 
     def scale(frame):
         return ((frame - mean) / std).to_numpy(dtype=np.float32)
 
+    y_train_raw = train_data["Close"].to_numpy(dtype=np.float32)
+    y_val_raw = val_data["Close"].to_numpy(dtype=np.float32)
+    y_test_raw = test_data["Close"].to_numpy(dtype=np.float32)
+
     x_train, y_train = make_sequences(
-        scale(train_data), train_data["Close"].to_numpy(dtype=np.float32),
+        scale(train_data), (y_train_raw - target_mean) / target_std,
         args.window_size
     )
     x_val, y_val = make_sequences(
-        scale(val_data), val_data["Close"].to_numpy(dtype=np.float32),
+        scale(val_data), (y_val_raw - target_mean) / target_std,
         args.window_size
     )
     x_test, y_test = make_sequences(
-        scale(test_data), test_data["Close"].to_numpy(dtype=np.float32),
+        scale(test_data), (y_test_raw - target_mean) / target_std,
         args.window_size
+    )
+    _, y_train_actual = make_sequences(
+        scale(train_data), y_train_raw, args.window_size
+    )
+    _, y_val_actual = make_sequences(scale(val_data), y_val_raw, args.window_size)
+    _, y_test_actual = make_sequences(
+        scale(test_data), y_test_raw, args.window_size
     )
 
     os.makedirs(os.path.dirname(args.output) or ".", exist_ok=True)
@@ -96,11 +109,16 @@ def main():
         args.output,
         x_train=x_train,
         y_train=y_train,
+        y_train_actual=y_train_actual,
         x_val=x_val,
         y_val=y_val,
+        y_val_actual=y_val_actual,
         x_test=x_test,
         y_test=y_test,
+        y_test_actual=y_test_actual,
         features=np.array(FEATURES),
+        target_mean=np.array(target_mean, dtype=np.float32),
+        target_std=np.array(target_std, dtype=np.float32),
     )
 
     scaler_path = os.path.splitext(args.output)[0] + "_scaler.json"
@@ -110,6 +128,8 @@ def main():
                 "features": FEATURES,
                 "mean": mean.to_dict(),
                 "std": std.to_dict(),
+                "target_mean": target_mean,
+                "target_std": target_std,
                 "window_size": args.window_size,
             },
             scaler_file,

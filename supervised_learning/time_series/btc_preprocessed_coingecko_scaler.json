@@ -1,0 +1,32 @@
+{
+  "features": [
+    "Open",
+    "High",
+    "Low",
+    "Close",
+    "Volume_(BTC)",
+    "Volume_(Currency)",
+    "Weighted_Price"
+  ],
+  "mean": {
+    "Open": 74102.27675983771,
+    "High": 74102.27675983771,
+    "Low": 74101.39619982567,
+    "Close": 74101.39619982567,
+    "Volume_(BTC)": 0.0,
+    "Volume_(Currency)": 0.0,
+    "Weighted_Price": 74101.5653378073
+  },
+  "std": {
+    "Open": 5570.811838872319,
+    "High": 5570.811838872319,
+    "Low": 5571.092771374135,
+    "Close": 5571.092771374135,
+    "Volume_(BTC)": 1.0,
+    "Volume_(Currency)": 1.0,
+    "Weighted_Price": 5571.020177169248
+  },
+  "target_mean": 74101.39619982567,
+  "target_std": 5571.092771374135,
+  "window_size": 24
+}
