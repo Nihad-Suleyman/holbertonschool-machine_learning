@@ -1,64 +1,48 @@
 #!/usr/bin/env python3
-"""Prepare a dataset for Portuguese-to-English translation."""
+"""Dataset module"""
 
 import transformers
 from setup import load_pt2en
 
 
 class Dataset:
-    """Load translation data and create sub-word tokenizers."""
+    """Loads and tokenizes the Portuguese-English translation dataset."""
 
     def __init__(self):
-        """Initialize the datasets and tokenizers."""
-        self.data_train = load_pt2en("train")
-        self.data_valid = load_pt2en("validation")
+        """Class constructor."""
+        self.data_train = load_pt2en(split="train")
+        self.data_valid = load_pt2en(split="validation")
 
-        tokenizers = self.tokenize_dataset(self.data_train)
-        self.tokenizer_pt = tokenizers[0]
-        self.tokenizer_en = tokenizers[1]
+        self.tokenizer_pt, self.tokenizer_en = self.tokenize_dataset(
+            self.data_train
+        )
 
     def tokenize_dataset(self, data):
         """
-        Create Portuguese and English tokenizers.
-
-        Args:
-            data: A dataset containing Portuguese-English sentence pairs.
-
-        Returns:
-            A tuple containing the Portuguese and English tokenizers.
+        Creates subword tokenizers for Portuguese and English.
         """
-        pretrained_pt = transformers.AutoTokenizer.from_pretrained(
-            "neuralmind/bert-base-portuguese-cased"
-        )
+        pt_sentences = []
+        en_sentences = []
+        # Iterate over the dataset
+        for pt, en in data:
+            pt_sentences.append(pt.numpy().decode('utf-8'))
+            en_sentences.append(en.numpy().decode('utf-8'))
 
-        pretrained_en = transformers.AutoTokenizer.from_pretrained(
-            "bert-base-uncased"
-        )
+        # Create tokenizers for Portuguese and English
+        tokenizer_pt = transformers.AutoTokenizer.from_pretrained(
+            'neuralmind/bert-base-portuguese-cased', use_fast=True,
+            clean_up_tokenization_spaces=True)
+        tokenizer_en = transformers.AutoTokenizer.from_pretrained(
+            'bert-base-uncased', use_fast=True,
+            clean_up_tokenization_spaces=True)
 
-        def portuguese_iterator():
-            """Yield batches of Portuguese sentences."""
-            for portuguese, _ in data.batch(1000):
-                yield [
-                    sentence.decode("utf-8")
-                    for sentence in portuguese.numpy()
-                ]
+        # Train the tokenizers
+        tokenizer_pt = tokenizer_pt.train_new_from_iterator(pt_sentences,
+                                                            vocab_size=2 ** 13)
+        tokenizer_en = tokenizer_en.train_new_from_iterator(en_sentences,
+                                                            vocab_size=2 ** 13)
 
-        def english_iterator():
-            """Yield batches of English sentences."""
-            for _, english in data.batch(1000):
-                yield [
-                    sentence.decode("utf-8")
-                    for sentence in english.numpy()
-                ]
+        self.tokenizer_pt = tokenizer_pt
+        self.tokenizer_en = tokenizer_en
 
-        tokenizer_pt = pretrained_pt.train_new_from_iterator(
-            portuguese_iterator(),
-            vocab_size=2 ** 13
-        )
-
-        tokenizer_en = pretrained_en.train_new_from_iterator(
-            english_iterator(),
-            vocab_size=2 ** 13
-        )
-
-        return tokenizer_pt, tokenizer_en
+        return self.tokenizer_pt, self.tokenizer_en
