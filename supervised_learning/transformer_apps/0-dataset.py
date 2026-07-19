@@ -1,58 +1,55 @@
 #!/usr/bin/env python3
-"""Loads and prepares a Portuguese-to-English translation dataset."""
+"""Dataset preparation for Portuguese-to-English translation."""
 
-from transformers import AutoTokenizer
+import transformers
 from setup import load_pt2en
 
 
 class Dataset:
-    """Loads a dataset and creates Portuguese and English tokenizers."""
+    """Loads translation datasets and creates sub-word tokenizers."""
 
     def __init__(self):
-        """Initialize the training data, validation data, and tokenizers."""
+        """Initialize the training and validation datasets."""
         self.data_train = load_pt2en("train")
         self.data_valid = load_pt2en("validation")
 
-        self.tokenizer_pt, self.tokenizer_en = self.tokenize_dataset(
-            self.data_train
-        )
+        tokenizers = self.tokenize_dataset(self.data_train)
+        self.tokenizer_pt, self.tokenizer_en = tokenizers
 
     def tokenize_dataset(self, data):
         """
         Create Portuguese and English sub-word tokenizers.
 
         Args:
-            data: A tf.data.Dataset containing (Portuguese, English) pairs.
+            data: Dataset containing Portuguese-English sentence pairs.
 
         Returns:
-            tokenizer_pt: The trained Portuguese tokenizer.
-            tokenizer_en: The trained English tokenizer.
+            The Portuguese and English tokenizers.
         """
-        base_tokenizer_pt = AutoTokenizer.from_pretrained(
+        pretrained_pt = transformers.AutoTokenizer.from_pretrained(
             "neuralmind/bert-base-portuguese-cased"
         )
-
-        base_tokenizer_en = AutoTokenizer.from_pretrained(
+        pretrained_en = transformers.AutoTokenizer.from_pretrained(
             "bert-base-uncased"
         )
 
-        def portuguese_iterator():
-            """Yield Portuguese sentences as strings."""
-            for pt, _ in data.as_numpy_iterator():
-                yield pt.decode("utf-8")
+        def portuguese_sentences():
+            """Yield Portuguese sentences from the dataset."""
+            for portuguese, _ in data:
+                yield portuguese.numpy().decode("utf-8")
 
-        def english_iterator():
-            """Yield English sentences as strings."""
-            for _, en in data.as_numpy_iterator():
-                yield en.decode("utf-8")
+        def english_sentences():
+            """Yield English sentences from the dataset."""
+            for _, english in data:
+                yield english.numpy().decode("utf-8")
 
-        tokenizer_pt = base_tokenizer_pt.train_new_from_iterator(
-            portuguese_iterator(),
+        tokenizer_pt = pretrained_pt.train_new_from_iterator(
+            portuguese_sentences(),
             vocab_size=2 ** 13
         )
 
-        tokenizer_en = base_tokenizer_en.train_new_from_iterator(
-            english_iterator(),
+        tokenizer_en = pretrained_en.train_new_from_iterator(
+            english_sentences(),
             vocab_size=2 ** 13
         )
 
