@@ -1,0 +1,1 @@
+we will look at parameters of qa bats.
