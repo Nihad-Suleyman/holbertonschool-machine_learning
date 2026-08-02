@@ -10,7 +10,7 @@ class BayesianOptimization:
 
     def __init__(self,
                  f, X_init, Y_init, bounds, ac_samples,
-                 l=1, sigma_f=1, xsi=0.01, minimize=True):
+                 l=1, sigma_f=1, xsi=0.01, minimize=True):  # noqa
         """Initialize the optimizer and acquisition sample grid."""
         self.f = f
         self.gp = GP(X_init, Y_init, l, sigma_f)
@@ -22,23 +22,22 @@ class BayesianOptimization:
 
     def acquisition(self):
         """Acquisition function"""
-        mean, variance = self.gp.predict(self.X_s)
-        standard_deviation = np.sqrt(np.maximum(variance, 0))
+        mean, sigma = self.gp.predict(self.X_s)
 
         if self.minimize:
             improvement = np.min(self.gp.Y) - mean - self.xsi
         else:
             improvement = mean - np.max(self.gp.Y) - self.xsi
 
-        z_score = np.zeros_like(standard_deviation)
-        has_uncertainty = standard_deviation > 0
+        z_score = np.zeros_like(sigma)
+        has_uncertainty = sigma > 0
         z_score[has_uncertainty] = (
-            improvement[has_uncertainty]
-            / standard_deviation[has_uncertainty]
+            improvement[has_uncertainty] /
+            sigma[has_uncertainty]
         )
         expected_improvement = (
-            improvement * norm.cdf(z_score)
-            + standard_deviation * norm.pdf(z_score)
+            improvement * norm.cdf(z_score) +
+            sigma * norm.pdf(z_score)
         )
         expected_improvement[~has_uncertainty] = 0
 

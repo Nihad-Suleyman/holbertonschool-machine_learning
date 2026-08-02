@@ -88,11 +88,13 @@ def objective(params):
     )
 
     checkpoint_name = (
-        f"checkpoint_lr{learning_rate:.5f}"
-        f"_u{units}"
-        f"_d{dropout_rate:.2f}"
-        f"_l2{l2_weight:.5f}"
-        f"_b{batch_size}.keras"
+        "checkpoint_lr{:.5f}_u{}_d{:.2f}_l2{:.5f}_b{}.keras".format(
+            learning_rate,
+            units,
+            dropout_rate,
+            l2_weight,
+            batch_size
+        )
     )
 
     checkpoint = ModelCheckpoint(
@@ -152,6 +154,7 @@ BOUNDS = [
     }
 ]
 
+
 def main():
     """Run optimization and save its report and convergence plot."""
     load_dataset()
@@ -169,7 +172,9 @@ def main():
     with open('bayes_opt.txt', 'w', encoding='utf-8') as report:
         report.write("Bayesian Optimization Report\n")
         report.write("=" * 40 + "\n\n")
-        report.write(f"Best Validation Accuracy: {best_score:.4f}\n\n")
+        report.write(
+            "Best Validation Accuracy: {:.4f}\n\n".format(best_score)
+        )
         report.write("Best Hyperparameters:\n")
         report.write(f"Learning Rate: {best_params[0]}\n")
         report.write(f"Units: {int(best_params[1])}\n")
