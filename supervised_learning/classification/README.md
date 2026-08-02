@@ -1,1 +1,4 @@
-in this folder we will look at Neural Network tasks.
+# Classification
+
+Python implementations of neurons, shallow neural networks, and deep neural
+networks for binary and multiclass classification.
