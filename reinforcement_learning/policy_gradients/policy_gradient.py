@@ -16,4 +16,22 @@ def policy(matrix, weight):
     """
     z = np.matmul(matrix, weight)
     exp = np.exp(z)
-    return exp / np.sum(exp, axis=1, keepdims=True)
+    return exp / np.sum(exp, axis=-1, keepdims=True)
+
+
+def policy_gradient(state, weight):
+    """Compute the Monte Carlo policy gradient.
+
+    Args:
+        state: The current observation of the environment.
+        weight: The weight matrix.
+
+    Returns:
+        A tuple of the selected action and its gradient.
+    """
+    probabilities = policy(state, weight)
+    action = np.random.choice(weight.shape[1], p=probabilities)
+    action_probabilities = -probabilities
+    action_probabilities[action] += 1
+
+    return action, np.outer(state, action_probabilities)
