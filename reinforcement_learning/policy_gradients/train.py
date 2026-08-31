@@ -25,7 +25,8 @@ def _step(env, action):
     return state, reward, done
 
 
-def train(env, nb_episodes, alpha=0.000045, gamma=0.98):
+def train(env, nb_episodes, alpha=0.000045, gamma=0.98,
+          show_result=False):
     """Implement full policy gradient training.
 
     Args:
@@ -33,6 +34,7 @@ def train(env, nb_episodes, alpha=0.000045, gamma=0.98):
         nb_episodes: The number of episodes used for training.
         alpha: The learning rate.
         gamma: The discount factor.
+        show_result: Whether to render the environment every 1000 episodes.
 
     Returns:
         A list containing the score of all rounds during training.
@@ -47,6 +49,9 @@ def train(env, nb_episodes, alpha=0.000045, gamma=0.98):
         done = False
 
         while not done:
+            if show_result and episode % 1000 == 0:
+                env.render()
+
             action, gradient = policy_gradient(state, weight)
             state, reward, done = _step(env, action)
 
